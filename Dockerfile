@@ -2,7 +2,7 @@ FROM node:21.7
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm i
+RUN npm install
 COPY . .
 EXPOSE 3000
 

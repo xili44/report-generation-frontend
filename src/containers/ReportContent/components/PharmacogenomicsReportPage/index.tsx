@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 type PharmacogenomicsReportPagePropsType = {
   geneDrugMappings: IGeneDrugMapping[];
   pageRef: React.RefObject<HTMLDivElement>;

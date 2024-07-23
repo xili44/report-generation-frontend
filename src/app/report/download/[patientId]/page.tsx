@@ -2,6 +2,7 @@
 import { NextPage } from "next";
 import ReportContentContainer from "@/containers/ReportContent";
 import { useEffect, useState } from "react";
+import authorization from "@/constants/authorization";
 const DownloadPage: NextPage<{ params: { patientId: number } }> = ({
   params,
 }) => {
@@ -11,28 +12,33 @@ const DownloadPage: NextPage<{ params: { patientId: number } }> = ({
     IPharmacogenomics[]
   >([]);
   const getPatient = async (patientId: number) => {
-    const response: { data: IPatient; success: boolean } = await (
-      await fetch(`http://127.0.0.1:5000/patient/${patientId}`)
+    const response: IPatient = await (
+      await fetch(`http://localhost:8001/api/patients/${patientId}`)
     ).json();
-    setPatient(response.data);
+    setPatient(response);
   };
   const getPatientGenomes = async (patientId: number) => {
-    const response: { data: { detectedGenes: string[] }; success: boolean } =
-      await (await fetch(`http://127.0.0.1:5000/genome/${patientId}`)).json();
-    setGenomes(response.data.detectedGenes);
-    return response.data.detectedGenes;
+    const response: { detectedGenes: string[] } = await (
+      await fetch(`http://localhost:8001/api/genomes/${patientId}`)
+    ).json();
+    setGenomes(response.detectedGenes);
+    return response.detectedGenes;
   };
   const getPharmacogenomicsData = async (genomes: string[]) => {
     const data = JSON.stringify({ detectedGenes: genomes });
-    const response: { data: IPharmacogenomics[]; success: boolean } = await (
-      await fetch(`http://127.0.0.1:5000/pharmacogenomics`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: data,
-      })
+    const response: { data: IPharmacogenomics[] } = await (
+      await fetch(
+        `http://127.0.0.1:8001/api/pharmacogenomics/get-pharmacogenomics-from-genome/`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: authorization,
+          },
+          body: data,
+        }
+      )
     ).json();
     setPharamcogenomicsData(response.data);
     return response.data;

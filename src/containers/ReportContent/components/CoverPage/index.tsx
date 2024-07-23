@@ -29,12 +29,12 @@ const CoverPage: React.FC<CoverPagePropsType> = ({ patient, pageRef }) => {
           <div className="w-full flex flex-row justify-between">
             <div className="flex flex-col gap-2">
               {getInfoEle("Patient Name", patient?.name)}
-              {getInfoEle("Date of Birth", patient?.DOB)}
+              {getInfoEle("Date of Birth", patient?.dob)}
               {getInfoEle("Ordered By", patient?.orderedBy)}
               {getInfoEle("Date of Report", patient?.dateOfReport)}
             </div>
             <div className="flex flex-col gap-2">
-              {getInfoEle("HN", patient?.HN)}
+              {getInfoEle("HN", patient?.hn)}
               {getInfoEle("Gender", patient?.gender)}
               {getInfoEle(
                 "Hospital Name/Clinic",
@@ -47,9 +47,9 @@ const CoverPage: React.FC<CoverPagePropsType> = ({ patient, pageRef }) => {
             <span className="text-[#80643a] font-semibold">Remark: </span>
             <span>
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
+              industry. Lorem Ipsum has been the industry&apos;s standard dummy
+              text ever since the 1500s, when an unknown printer took a galley
+              of type and scrambled it to make a type specimen book. It has
               survived not only five centuries, but also the leap into
               electronic typesetting, remaining essentially unchanged. It was
               popularised in the 1960s with the release of Letraset sheets

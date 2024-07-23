@@ -1,21 +1,21 @@
 interface IPatient {
-    ID: number;
-    DOB: string;
-    dateOfOrder: string;
-    dateOfReport: string;
-    ethnicity: string;
-    gender: string;
-    HN: string;
-    name: string;
-    orderedBy: string;
-    title: string;
+  id: number;
+  dob: string;
+  dateOfOrder: string;
+  dateOfReport: string;
+  ethnicity: string;
+  gender: string;
+  hn: string;
+  name: string;
+  orderedBy: string;
+  title: string;
 }
 
 interface IPharmacogenomics {
-    ID: number;
-    description: string;
-    drug: string;
-    gene: string;
+  id: number;
+  description: string;
+  drug: string;
+  gene: string;
 }
 
 interface IGeneDrugMapping {

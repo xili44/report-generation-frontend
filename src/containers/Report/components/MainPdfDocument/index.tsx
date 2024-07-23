@@ -1,18 +1,11 @@
 import React from "react";
 import { Page, Text, Image, Font, View, Document } from "@react-pdf/renderer";
 import styles from "./styles";
-import { get } from "http";
 
 type MainPdfDocumentPropsType = {
   patient: IPatient;
-  genomes: string[];
-  pharmacogenomicsData: IPharmacogenomics[];
 };
-const MainPdfDocument: React.FC<MainPdfDocumentPropsType> = ({
-  patient,
-  genomes,
-  pharmacogenomicsData,
-}) => {
+const MainPdfDocument: React.FC<MainPdfDocumentPropsType> = ({ patient }) => {
   const getPatientInfoElement = (label: string, data: string) => {
     return (
       <View style={styles.patient_info_element}>
@@ -50,14 +43,15 @@ const MainPdfDocument: React.FC<MainPdfDocumentPropsType> = ({
         <View style={styles.remark_section}>
           <Text>
             Remark: Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            typesetting industry. Lorem Ipsum has been the industry&apos;s
+            standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was
+            popularised in the 1960s with the release of Letraset sheets
+            containing Lorem Ipsum passages, and more recently with desktop
+            publishing software like Aldus PageMaker including versions of Lorem
+            Ipsum.
           </Text>
         </View>
       </Page>

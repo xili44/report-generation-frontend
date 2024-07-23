@@ -12,7 +12,6 @@ type ReportContentContainerPropsType = {
 };
 const ReportContentContainer: React.FC<ReportContentContainerPropsType> = ({
   patient,
-  genomes,
   pharmacogenomicsData,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,7 +31,7 @@ const ReportContentContainer: React.FC<ReportContentContainerPropsType> = ({
     pharmacogenomicsData: IPharmacogenomics[]
   ) => {
     const mappings: IGeneDrugMapping[] = [];
-    pharmacogenomicsData.forEach((item: IPharmacogenomics) => {
+    pharmacogenomicsData?.forEach((item: IPharmacogenomics) => {
       if (mappings.find((val) => val.gene == item.gene)) {
         mappings
           .find((val) => val.gene == item.gene)
@@ -51,7 +50,7 @@ const ReportContentContainer: React.FC<ReportContentContainerPropsType> = ({
     const mappings = processPharamacogenomicsData(pharmacogenomicsData);
     setPharmReportPages(mappings.length);
     setGeneDrugMappings(mappings);
-  }, [pharmacogenomicsData.length]);
+  }, [pharmacogenomicsData]);
 
   const addNewPage = async (pdf: jsPDF, canvas: HTMLCanvasElement) => {
     pdf.addPage();

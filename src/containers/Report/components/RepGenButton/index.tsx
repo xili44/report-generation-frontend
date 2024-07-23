@@ -16,33 +16,37 @@ const RepGenButton: React.FC<RepGenButtonType> = ({
 }) => {
   const getPatientGenomes = async (patientId: number) => {
     const response: { data: { detectedGenes: string[] }; success: boolean } =
-      await (await fetch(`http://127.0.0.1:5000/genome/${patientId}`)).json();
+      await (
+        await fetch(`http://127.0.0.1:8001/api/genome/${patientId}`, {
+          headers: {
+            method: "GET",
+            "Content-Type": "application/json",
+            Authorization: "Basic SuperUser:SYS",
+          },
+        })
+      ).json();
     return response.data.detectedGenes;
   };
   const getPharmacogenomicsData = async (genomes: string[]) => {
     const data = JSON.stringify({ detectedGenes: genomes });
     const response: { data: IPharmacogenomics[]; success: boolean } = await (
-      await fetch(`http://127.0.0.1:5000/pharmacogenomics`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: data,
-      })
+      await fetch(
+        `http://127.0.0.1:8001/api/pharmacogenomics/get-pharmacogenomics-from-genome/`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Basic SuperUser:SYS",
+          },
+          body: data,
+        }
+      )
     ).json();
     return response.data;
   };
   const generatePDF = async (patient: IPatient) => {
-    const genomes = await getPatientGenomes(patient.ID);
-    const pharmacogenomicsData = await getPharmacogenomicsData(genomes);
-    const doc = (
-      <MainPdfDocument
-        patient={patient}
-        genomes={genomes}
-        pharmacogenomicsData={pharmacogenomicsData}
-      />
-    );
+    const doc = <MainPdfDocument patient={patient} />;
     const asPdf = pdf([]);
     asPdf.updateContainer(doc);
     const blob = await asPdf.toBlob();
@@ -51,7 +55,7 @@ const RepGenButton: React.FC<RepGenButtonType> = ({
     setIsModalOpen(true);
   };
   return (
-    <Link href={`/report/download/${patientSelected?.ID}`}>
+    <Link href={`/report/download/${patientSelected?.id}`}>
       <Button type="primary" disabled={patientSelected == undefined}>
         Generate Report
       </Button>

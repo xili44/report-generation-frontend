@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
     "antd": "^5.18.0",
+    "base-64": "^1.0.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
@@ -21,6 +22,7 @@
     "yarn": "^1.22.22"
   },
   "devDependencies": {
+    "@types/base-64": "^1.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-autosuggest": "^10.1.11",

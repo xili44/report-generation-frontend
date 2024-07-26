@@ -10,16 +10,10 @@ docker build -t repgen-frontend .
 
 ### Run Docker container
 
-- Run the following command to find out the image id of repgen-frontend
-
-```bash
-docker images
-```
-
 - Run the docker container
 
 ```bash
-docker run -p 3000:3000 IMAGE_ID 
+docker run -p 3000:3000 repgen-frontend
 ```
 
 ## The non-Docker Approach
